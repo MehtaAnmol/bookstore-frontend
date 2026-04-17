@@ -2,22 +2,17 @@ import { Library, ShoppingCartIcon, User, Search, BookOpen } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 
-const MOCK_BOOKS = [
-  { id: 1, title: "The Great Gatsby", author: "F. Scott Fitzgerald" },
-  { id: 2, title: "1984", author: "George Orwell" },
-  { id: 3, title: "The Hobbit", author: "J.R.R. Tolkien" },
-  { id: 4, title: "To Kill a Mockingbird", author: "Harper Lee" },
-];
 
 
-export default function NavBar(){
+
+export default function NavBar({MOCK_BOOKS}){
     const [text, setText] = useState('')
     const [results, setResults] = useState([])
     const [isDropDownOpen, setIsDropDownOpen] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
-        const timeout = setTimeout(() => {
+        const timer = setTimeout(() => {
                 if(text.trim().length > 0){
                     const filtered = MOCK_BOOKS.filter(book => book.title.toLowerCase().includes(text.toLowerCase()))
                     setResults(filtered)
@@ -27,7 +22,7 @@ export default function NavBar(){
                     setIsDropDownOpen(false)
                 }
            }, 300)   
-        return () => clearTimeout(timeout)
+        return () => clearTimeout(timer)
     },[text])
 
 
