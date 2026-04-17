@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 export default function BookGrid({books}){
 
@@ -23,10 +23,11 @@ export default function BookGrid({books}){
 }
 
 function BookCard({book}){
+    const location = useLocation()
     const navigate = useNavigate()
     return(
         <article 
-            onClick = {() => navigate(`/books/:${book.id}`)}
+            onClick = {() => navigate(`/books/${book._id}` , {state : {from : `${location}`}})}
             className = "bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col h-full transition-shadow hover:shadow-md"
         >
             <div className = "aspect-[3/4] w-full mb-4 overflow-hidden rounded-lg">
