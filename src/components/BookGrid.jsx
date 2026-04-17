@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
 export default function BookGrid({books}){
 
@@ -26,25 +26,26 @@ function BookCard({book}){
     const location = useLocation()
     const navigate = useNavigate()
     return(
-        <article 
-            onClick = {() => navigate(`/books/${book._id}` , {state : {from : `${location}`}})}
-            className = "bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col h-full transition-shadow hover:shadow-md"
-        >
-            <div className = "aspect-[3/4] w-full mb-4 overflow-hidden rounded-lg">
-                <img 
-                    src = '#' 
-                    alt={book.title} 
-                    className="w-full h-full object-cover shadow-inner"
-                />
-            </div>
-            <div className = "flex-grow">
-                <h3 className = 'font-bold text-slate-900 text-lg leading-tight line-clamp-2'>{book.title}</h3>
-                <p className = 'text-slate-500 text-sm mt-1 mb-3'>{book.authors}</p>
-                <div className = "flex items-center gap-2 flex-wrap mb-4">
-                    <p className = 'text-slate-900 font-bold text-lg'>₹{book.price}</p>
-                    <button className = "w-full bg-[#ffda3a] hover:bg-[#f2cd2d] py-3 rounded-xl flex justify-center items-center gap-2 font-bold text-slate-900 transition-colors active:scale-[0.98] cursor-pointer">Add To Bag</button>
+        <Link to = {`/books/${book._id}`}>
+            <article 
+                className = "bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col h-full transition-shadow hover:shadow-md"
+            >
+                <div className = "aspect-[3/4] w-full mb-4 overflow-hidden rounded-lg">
+                    <img 
+                        src = '#' 
+                        alt={book.title} 
+                        className="w-full h-full object-cover shadow-inner"
+                    />
                 </div>
-            </div>
-        </article>
+                <div className = "flex-grow">
+                    <h3 className = 'font-bold text-slate-900 text-lg leading-tight line-clamp-2'>{book.title}</h3>
+                    <p className = 'text-slate-500 text-sm mt-1 mb-3'>{book.authors}</p>
+                    <div className = "flex items-center gap-2 flex-wrap mb-4">
+                        <p className = 'text-slate-900 font-bold text-lg'>₹{book.price}</p>
+                        <button className = "w-full bg-[#ffda3a] hover:bg-[#f2cd2d] py-3 rounded-xl flex justify-center items-center gap-2 font-bold text-slate-900 transition-colors active:scale-[0.98] cursor-pointer">Add To Bag</button>
+                    </div>
+                </div>
+            </article>
+        </Link>
     )
 }

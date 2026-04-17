@@ -1,6 +1,6 @@
 import { Library, ShoppingCartIcon, User, Search, BookOpen } from "lucide-react"
 import { useContext, useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BookContext } from "../context/bookContext";
 
 
@@ -35,8 +35,10 @@ export default function NavBar(){
         <nav className = "bg-white border-b border-slate-200 px-4 py-3 shadow-sm">
             <div className = 'max-w-7xl mx-auto flex items-center justify-between gap-4'>
                 <div className = 'flex items-center gap-2 text-blue-600 font-bold text-xl cursor-pointer'>
-                    <Library sixe = {28}/>
-                    <span className = "hidden sm:block">BookStore</span>
+                    <Library size = {28}/>
+                    <Link to = '/'>
+                        <span className = "hidden sm:block">BookStore</span>
+                    </Link>
                 </div>
                 <ul className = 'hidden md:flex items-center gap-6 text-slate-600 font-medium'> 
                     <li className = "hover:text-blue-600 transition-colors cursor-pointer">Books</li>
@@ -55,18 +57,18 @@ export default function NavBar(){
                     {
                         isDropDownOpen && results.length > 0 && (
                             <div className = "absolute top-full left-0 w-full mt-1 bg-white border border-slate-200 rounded-lg shadow-xl z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
-                                <ul className = 'max-height-[300px] overflow-y-auto'>
+                                <ul className = 'max-h-[300px] overflow-y-auto'>
                                     {
                                         results.map(book => (
                                             <li
                                                 className = "px-4 py-3 hover:bg-blue-50 flex items-center gap-3 cursor-pointer transition-colors border-b border-slate-50 last:border-none"
-                                                onClick = {() => navigate(`/books/:${book._id}`) } 
+                                                onClick = {() => navigate(`/books/${book._id}`) } 
                                                 key = {book._id}
                                             >
                                                 <BookOpen size={16} className="text-slate-400" />
                                                 <div>
                                                     <p className="text-sm font-medium text-slate-800">{book.title}</p>
-                                                    <p className="text-xs text-slate-500">{book.author}</p>
+                                                    <p className="text-xs text-slate-500">{book.authors}</p>
                                                 </div>
                                             </li>
                                         ))
@@ -77,8 +79,8 @@ export default function NavBar(){
                     }
                 </div>
                 <div className = "flex items-center gap-4 text-slate-600">
-                    <button className = 'p-2 hover:bg-slate-100 rounded-full transition-colors relative" aria-label="Shopping Cart'><ShoppingCartIcon size = {24} /></button>
-                    <button className = 'p-2 hover:bg-slate-100 rounded-full transition-colors" aria-label="User Account"'><User size = {24} /></button>
+                    <button className = 'p-2 hover:bg-slate-100 rounded-full transition-colors relative' aria-label="Shopping Cart"><ShoppingCartIcon size = {24} /></button>
+                    <button className = 'p-2 hover:bg-slate-100 rounded-full transition-colors' aria-label="User Account"><User size = {24} /></button>
                 </div>
             </div>
         </nav>

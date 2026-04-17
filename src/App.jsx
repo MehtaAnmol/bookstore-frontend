@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import BookGrid from "./components/BookGrid";
-import { BookContext, BookProvider } from "./context/bookContext";
+import { BookProvider } from "./context/bookContext";
 import BookPage from "./pages/BookPage";
 import BookHomePage from "./pages/BooksHomePage";
 

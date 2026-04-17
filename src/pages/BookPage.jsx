@@ -16,7 +16,7 @@ export default function BookPage(){
         
     if(error) return (
         <div className = "p-8 text-center text-red-500">
-            Error : {error.message}
+            Error : {error}
         </div>
     )
     
@@ -59,7 +59,7 @@ export default function BookPage(){
                                 {book.title}
                             </h1>
                             <p className="text-blue-600 font-medium mt-1 cursor-pointer hover:underline">
-                                {book.author}
+                                {book.authors}
                             </p>
                         </div>
                         <button className="p-2 border border-slate-200 rounded-full hover:bg-slate-50 transition-colors">
@@ -72,7 +72,7 @@ export default function BookPage(){
                             <div className="flex text-yellow-400">
                                 {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
                             </div>
-                            <span className="text-slate-600 font-medium">{book.reviews.length} review</span>
+                            <span className="text-slate-600 font-medium"> {book.reviews?.length ?? 0} review</span>
                         </div>
                         <div className="h-4 w-px bg-slate-300"></div>
                         <div className="flex items-center gap-1 text-slate-500">
@@ -82,7 +82,7 @@ export default function BookPage(){
                     </div>
 
                     <div className="flex flex-wrap gap-2 mt-2">
-                        {book.tags.map(tag => (
+                        {book.tags?.map(tag => (
                             <span key={tag} className="bg-slate-100 text-slate-700 text-xs px-3 py-1 rounded font-medium">
                                 {tag}
                             </span>
