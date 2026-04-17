@@ -1,20 +1,20 @@
 import { Library, ShoppingCartIcon, User, Search, BookOpen } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
+import { BookContext } from "../context/bookContext";
 
 
-
-
-export default function NavBar({MOCK_BOOKS}){
+export default function NavBar(){
     const [text, setText] = useState('')
     const [results, setResults] = useState([])
     const [isDropDownOpen, setIsDropDownOpen] = useState(false)
+    const {books} = useContext(BookContext)
     const navigate = useNavigate()
 
     useEffect(() => {
         const timer = setTimeout(() => {
                 if(text.trim().length > 0){
-                    const filtered = MOCK_BOOKS.filter(book => book.title.toLowerCase().includes(text.toLowerCase()))
+                    const filtered = books.filter(book => book.title.toLowerCase().includes(text.toLowerCase()))
                     setResults(filtered)
                     setIsDropDownOpen(true)
                 }else{
@@ -60,8 +60,8 @@ export default function NavBar({MOCK_BOOKS}){
                                         results.map(book => (
                                             <li
                                                 className = "px-4 py-3 hover:bg-blue-50 flex items-center gap-3 cursor-pointer transition-colors border-b border-slate-50 last:border-none"
-                                                onClick = {() => navigate(`/books/:${book.id}`) } 
-                                                key = {book.id}
+                                                onClick = {() => navigate(`/books/:${book._id}`) } 
+                                                key = {book._id}
                                             >
                                                 <BookOpen size={16} className="text-slate-400" />
                                                 <div>

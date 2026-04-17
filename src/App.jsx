@@ -1,6 +1,8 @@
 import { BrowserRouter } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import BookGrid from "./components/BookGrid";
+import { useContext } from "react";
+import { BookContext } from "./context/bookContext";
 
 const MOCK_BOOKS = [
   { id: 1, price : 300, title: "The Great Gatsby", author: "F. Scott Fitzgerald" },
@@ -9,13 +11,17 @@ const MOCK_BOOKS = [
   { id: 4, price : 950, title: "To Kill a Mockingbird", author: "Harper Lee" },
 ];
 
+
+
 export default function App(){
+  const {books, loading, error} = useContext(BookContext)
+
+  if(loading) return <p>Loading Books....</p>
+  if(error) return <p>Error encountered!</p>
   return(
     <>
-      <BrowserRouter>
-        <NavBar MOCK_BOOKS = {MOCK_BOOKS}/>
-        <BookGrid MOCK_BOOKS = {MOCK_BOOKS} />
-      </BrowserRouter>
+        <NavBar/>
+        <BookGrid books = {books}/>
     </>
   )
 }
