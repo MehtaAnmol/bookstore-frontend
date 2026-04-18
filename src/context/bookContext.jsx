@@ -6,13 +6,13 @@ export const BookProvider = ({children}) => {
     const [books, setBooks] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
-    const VITE_API_URL = import.meta.env.VITE_API_URL
+    const VITE_API_URL = import.meta.env.VITE_API_URL ||import.meta.env.VITE_API_URL_LOCAL
 
     useEffect(() => {
         async function fetchBooks(){
             setError(null)
             try{
-                const response = await fetch(`${VITE_API_URL}/books`)
+                const response = await fetch(`${VITE_API_URL}/api/v1/books`)
                 const result = await response.json()
                 if(!response.ok){
                     const errMessage = result?.data?.message || result?.message || "Something went wrong"
