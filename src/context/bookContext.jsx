@@ -12,7 +12,7 @@ export const BookProvider = ({children}) => {
         async function fetchBooks(){
             setError(null)
             try{
-                const response = await fetch(VITE_API_URL)
+                const response = await fetch(`${VITE_API_URL}/books`)
                 const result = await response.json()
                 if(!response.ok){
                     const errMessage = result?.data?.message || result?.message || "Something went wrong"
